@@ -30,3 +30,20 @@ export const loginUser = async (email: string, password: string) => {
 
   return token;
 };
+
+export const deleteUser = async (userID: string) => {
+  return User.findByIdAndDelete(userID);
+};
+
+export const changeUserPassword = async (
+  userID: string,
+  newPassword: string
+) => {
+  const user = await User.findById(userID);
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  user.password = newPassword;
+  await user.save();
+};
