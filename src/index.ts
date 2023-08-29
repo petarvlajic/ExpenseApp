@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes";
 import expenseRoutes from "./routes/expenseRoutes";
 import salaryRoutes from "./routes/salaryRoutes";
+import swaggerSpec from "./config/swagger";
+import swaggerUi from "swagger-ui-express";
 
 // Load Environemnt variables
 dotenv.config();
@@ -18,6 +20,7 @@ const port = process.env.PORT || 5000;
 app.use("/auth", authRoutes);
 app.use("/api", expenseRoutes);
 app.use("/api", salaryRoutes);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
