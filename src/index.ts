@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes";
 import expenseRoutes from "./routes/expenseRoutes";
 import salaryRoutes from "./routes/salaryRoutes";
+import cors from "cors";
 
 // Load Environemnt variables
 dotenv.config();
@@ -12,8 +13,9 @@ dotenv.config();
 connectDB();
 
 const app = express();
+app.use(cors());
 app.use(express.json());
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5200;
 
 app.use("/auth", authRoutes);
 app.use("/api", expenseRoutes);
