@@ -6,6 +6,8 @@ import expenseRoutes from "./routes/expenseRoutes";
 import salaryRoutes from "./routes/salaryRoutes";
 import swaggerSpec from "./config/swagger";
 import swaggerUi from "swagger-ui-express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 
 // Load Environemnt variables
 dotenv.config();
@@ -15,6 +17,8 @@ connectDB();
 
 const app = express();
 app.use(express.json());
+app.use(cors());
+app.use(cookieParser());
 const port = process.env.PORT || 5000;
 
 app.use("/auth", authRoutes);
