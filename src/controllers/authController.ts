@@ -21,10 +21,7 @@ export const loginUserController = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
     const token = await loginUser(email, password);
-    res
-      .status(200)
-      .cookie("token", token, { httpOnly: true, secure: true })
-      .json({ token });
+    res.status(200).json({ token });
   } catch (error) {
     console.error("Error during login:", error);
     res.status(401).json({ error: "Invalid credentials" });
