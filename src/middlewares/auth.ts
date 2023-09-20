@@ -9,7 +9,6 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
   if (token) {
     try {
       const decoded = jwt.verify(token, JWT_SECRET);
-      console.log(decoded);
       (req as any).userId = (decoded as any).userId;
       (req as any).user = await User.findById((decoded as any).id);
       next();

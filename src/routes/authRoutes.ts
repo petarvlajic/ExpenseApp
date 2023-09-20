@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  deleteUserController,
   loginUserController,
   registerUserController,
 } from "../controllers/authController";
@@ -9,8 +10,6 @@ const router = express.Router();
 
 router.post("/register", registerUserController);
 router.post("/login", loginUserController);
-router.route("/test").get(auth, () => {
-  console.log("proslo");
-});
+router.route("/delete/:userId").delete(auth, deleteUserController);
 
 export default router;
