@@ -4,6 +4,7 @@ import {
   loginUser,
   deleteUser,
   changeUserPassword,
+  isUsernameTaken,
 } from "../services/authService";
 
 export const registerUserController = async (req: Request, res: Response) => {
@@ -57,5 +58,16 @@ export const changeUserPasswordController = async (
   } catch (error) {
     console.error("Error changing password:", error);
     res.status(500).json({ error: "Failed to change password" });
+  }
+};
+
+export const checkUsernameValidty = async (req: Request, res: Response) => {
+  const { username } = req.params;
+  try {
+    const usernameExists = await isUsernameTaken(username);
+    res.json({ exists: usernameExists });
+  } catch (error) {
+    console.error("Error changing password:", error);
+    res.status(500).json({ error: "Failed to check username" });
   }
 };

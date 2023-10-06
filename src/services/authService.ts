@@ -47,3 +47,8 @@ export const changeUserPassword = async (
   user.password = newPassword;
   await user.save();
 };
+
+export const isUsernameTaken = async (username: string): Promise<boolean> => {
+  const user = await User.findOne({ username });
+  return !!user;
+};
